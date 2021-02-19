@@ -3,6 +3,7 @@
     <nav class="my-2 my-md-0 me-md-3">
       <a class="p-2 text-dark" href="{{ route("home") }}">Home</a>
       <a class="p-2 text-dark" href="{{ route("post.index") }}">Post</a>
-      <a class="p-2 text-dark" href="{{ route("category") }}">Category</a>
+      <a class="p-2 text-dark" href="{{ route("category.index") }}">Category</a>
+      <a class="p-2 text-dark" href="{{ route("contact.index") }}">Contact</a>
     </nav>
 </header>

@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -39,6 +40,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        Session::flash('alert-success', 'Se ha Creado con Éxito!');
         return view("post.create")->with(["categories" => $categories]);
     }
 
@@ -100,6 +102,7 @@ class PostController extends Controller
             $data['image'] = $request->file('image')->store('uploads', 'public');
         }
         Post::where('id', '=', $id)->update($data);
+        Session::flash('alert-success', 'Se ha Modificado con Éxito!');
         return redirect()->route("post.index");
     }
 
@@ -112,6 +115,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::destroy($id);
+        Session::flash('alert-success', 'Se ha Eliminado con Éxito!');
         return redirect()->route("post.index");
     }
 }
