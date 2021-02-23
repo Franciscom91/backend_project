@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function list()
     {
         $data = Category::all();
-        return response()->json(["categories" => $data], 200);
+        return response()->json($data, 202);
     }
 
     public function search(Request $request)
@@ -58,13 +58,16 @@ class CategoryController extends Controller
         //$data = $request->all();
         $data = $request->except('_token');
         Category::insert($data);
-        Session::flash('alert-success', 'Se ha Creado con Éxito!');
+        Session::flash('alert-success', "Se ha Creado con Éxito! {$data['name']}");
         return redirect()->route("category.index");
     }
 
     public function save(Request $request)
     {
-        Category::insert($request);
+        $category = new Category;
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
         return response()->json("La información se guardó con éxito", 201);
     }
 
